@@ -7,5 +7,4 @@ public class Book
     public string bookTitle;
     public string bookAuthor;
     public string publisher;
-
 }
