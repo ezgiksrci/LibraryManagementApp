@@ -39,13 +39,14 @@ public class SearchBook : MonoBehaviour
         // Display search results
         if (searchResults.Count > 0)
         {
+            // Debug.Log("Search Results:");
+
             OnSearchButtonClicked?.Invoke(searchResults);
 
-            Debug.Log("Search Results:");
         }
         else
         {
-            //Debug.LogWarning("No matching books found.");
+            // Debug.LogWarning("No matching books found.");
 
             OnSearchButtonClicked?.Invoke(null);
         }

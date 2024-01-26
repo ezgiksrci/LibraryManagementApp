@@ -12,4 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f14b50a622c83a64392eb5b1a46dd5aa, type: 3}
   m_Name: Library
   m_EditorClassIdentifier: 
-  bookSOsList: []
+  bookSOList:
+  - {fileID: 11400000, guid: 535f481d618cdf5419df979d0fec582b, type: 2}
+  - {fileID: 11400000, guid: 217947eabcf078b4ba7150e7018bc218, type: 2}
+  - {fileID: 11400000, guid: c366440395db67440865e3e3355497ce, type: 2}
+  - {fileID: 11400000, guid: 4291a1e8b554e9a48bb0d1334f2f1c05, type: 2}
+  - {fileID: 11400000, guid: a42956b80d823124aace51924fe19b8a, type: 2}
+  - {fileID: 11400000, guid: d56c75e8f3d62714fa38ab0c524ade38, type: 2}

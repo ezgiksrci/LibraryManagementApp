@@ -3,10 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SelectBook : MonoBehaviour
+public class BookObject : MonoBehaviour
 {
-    public event Action<BookSO> OnBookActionButtonClick;
-
     [SerializeField] SearchedBookListUI searchedBooklistUI;
     [SerializeField] BookSO bookSO;
     public static BookSO selectedBookSO;
@@ -19,7 +17,6 @@ public class SelectBook : MonoBehaviour
     private void OnDisable()
     {
         searchedBooklistUI.OnBookFind -= SearchedBooklistUI_OnBookFind;
-
     }
 
     private void SearchedBooklistUI_OnBookFind(BookSO bookSO)
@@ -30,18 +27,21 @@ public class SelectBook : MonoBehaviour
         }
     }
 
-    public void OnBookSelectButtonClick()
+    public void SetAsSelectedBook()
     {
-        selectedBookSO = bookSO;
+        if (selectedBookSO == null || selectedBookSO != bookSO)
+        {
+            selectedBookSO = bookSO;
+        }
     }
 
-    public void OnLendButtonClick()
+    public static BookSO GetSelectedBookSO()
     {
-        selectedBookSO.LendBook("borrower name", DateTime.Today.AddDays(10f));
+        return selectedBookSO;
     }
 
-    public void OnEditButtonClicked()
+    public static void ClearSelectedBookSO()
     {
-        OnBookActionButtonClick?.Invoke(selectedBookSO);
+        selectedBookSO = null;
     }
 }

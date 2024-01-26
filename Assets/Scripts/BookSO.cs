@@ -11,6 +11,7 @@ public class BookSO : ScriptableObject
     public bool isAvailable = true;
     public string borrowerName;
     public System.DateTime dueDate;
+    public bool isOverdued = false;
 
 
     // Method to set the book as borrowed

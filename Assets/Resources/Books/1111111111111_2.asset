@@ -17,5 +17,6 @@ MonoBehaviour:
   author: bbb
   publisher: can
   pageCount: 123
-  isAvailable: 0
+  isAvailable: 1
   borrowerName: 
+  isOverdued: 0
