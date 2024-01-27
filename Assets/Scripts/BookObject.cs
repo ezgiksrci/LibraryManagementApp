@@ -9,6 +9,8 @@ public class BookObject : MonoBehaviour
     [SerializeField] BookSO bookSO;
     public static BookSO selectedBookSO;
 
+    public static event Action OnBookSelected;
+
     private void OnEnable()
     {
         searchedBooklistUI.OnBookFind += SearchedBooklistUI_OnBookFind;
@@ -32,6 +34,7 @@ public class BookObject : MonoBehaviour
         if (selectedBookSO == null || selectedBookSO != bookSO)
         {
             selectedBookSO = bookSO;
+            OnBookSelected?.Invoke();
         }
     }
 

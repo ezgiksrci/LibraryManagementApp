@@ -5,21 +5,20 @@ using UnityEngine;
 
 public class BasePage : MonoBehaviour
 {
-    [SerializeField] GameObject page;
-    public static event EventHandler OnPageOpen;
-    public static event EventHandler OnPageClose;
+    [SerializeField] GameObject panel;
+    public static event EventHandler OnPanelOpen;
+    public static event EventHandler OnPanelClose;
 
 
-
-    public void ShowPage()
+    public void ShowPanel()
     {
-        page.SetActive(true);
-        OnPageOpen?.Invoke(this, EventArgs.Empty);
+        panel.SetActive(true);
+        OnPanelOpen?.Invoke(this, EventArgs.Empty);
     }
 
-    public void HidePage()
+    public void HidePanel()
     {
-        page.SetActive(false);
-        OnPageClose?.Invoke(this, EventArgs.Empty);
+        panel.SetActive(false);
+        OnPanelClose?.Invoke(this, EventArgs.Empty);
     }
 }

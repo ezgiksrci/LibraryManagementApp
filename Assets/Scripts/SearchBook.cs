@@ -16,29 +16,26 @@ public class SearchBook : BasePage
 
     private void Start()
     {
+        EditBook.OnPanelOpen += EditBook_OnPanelOpen;
+        EditBook.OnPanelClose += EditBook_OnPanelClose;
+
         searchResults = new List<BookSO>();
     }
 
-    private void OnEnable()
+    private void OnDestroy()
     {
-        EditBook.OnPageOpen += EditBook_OnPageOpen;
-        EditBook.OnPageClose += EditBook_OnPageClose;
+        EditBook.OnPanelOpen -= EditBook_OnPanelOpen;
+        EditBook.OnPanelClose -= EditBook_OnPanelClose;
     }
 
-    private void OnDisable()
+    private void EditBook_OnPanelClose(object sender, EventArgs e)
     {
-        EditBook.OnPageOpen -= EditBook_OnPageOpen;
-        EditBook.OnPageClose -= EditBook_OnPageClose;
+        ShowPanel();
     }
 
-
-    private void EditBook_OnPageOpen(object sender, EventArgs e)
+    private void EditBook_OnPanelOpen(object sender, EventArgs e)
     {
-        HidePage();
-    }
-    private void EditBook_OnPageClose(object sender, EventArgs e)
-    {
-        ShowPage();
+        HidePanel();
     }
 
     public void SearchinLibrary()

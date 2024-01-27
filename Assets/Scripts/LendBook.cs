@@ -6,6 +6,6 @@ public class LendBook : BasePage
 {
     public void OnClickLendButton()
     {
-        ShowPage();
+        ShowPanel();
     }
 }

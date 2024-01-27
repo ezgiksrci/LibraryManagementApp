@@ -19,13 +19,27 @@ public class EditBook : BasePage
     {
         if (BookObject.GetSelectedBookSO() != null)
         {
-            ShowPage();
-            FillSelectedBookInfo();
+            ShowPanel();
         }
         else
         {
             Debug.Log("There is not a selected book.");
         }
+    }
+
+    private void Start()
+    {
+        BookObject.OnBookSelected += BookObject_OnBookSelected;
+    }
+
+    private void OnDestroy()
+    {
+        BookObject.OnBookSelected -= BookObject_OnBookSelected;
+    }
+
+    private void BookObject_OnBookSelected()
+    {
+        FillSelectedBookInfo();
     }
 
     private void FillSelectedBookInfo()
@@ -51,13 +65,18 @@ public class EditBook : BasePage
         // Set selectedBookSO = null
         BookObject.ClearSelectedBookSO();
 
+        ClearInputFields();
+
+        HidePanel();
+    }
+
+    private void ClearInputFields()
+    {
         // Clear input fields
         ISBNInput.text = "";
         titleInput.text = "";
         authorInput.text = "";
         pageCountInput.text = "";
         publisherInput.text = "";
-
-        HidePage();
     }
 }
