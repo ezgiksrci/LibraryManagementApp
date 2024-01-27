@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SearchBook : MonoBehaviour
+public class SearchBook : BasePage
 {
     public event Action<List<BookSO>> OnSearchButtonClicked;
 
@@ -17,6 +17,28 @@ public class SearchBook : MonoBehaviour
     private void Start()
     {
         searchResults = new List<BookSO>();
+    }
+
+    private void OnEnable()
+    {
+        EditBook.OnPageOpen += EditBook_OnPageOpen;
+        EditBook.OnPageClose += EditBook_OnPageClose;
+    }
+
+    private void OnDisable()
+    {
+        EditBook.OnPageOpen -= EditBook_OnPageOpen;
+        EditBook.OnPageClose -= EditBook_OnPageClose;
+    }
+
+
+    private void EditBook_OnPageOpen(object sender, EventArgs e)
+    {
+        HidePage();
+    }
+    private void EditBook_OnPageClose(object sender, EventArgs e)
+    {
+        ShowPage();
     }
 
     public void SearchinLibrary()

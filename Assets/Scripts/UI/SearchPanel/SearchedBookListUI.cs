@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class SearchedBookListUI : MonoBehaviour
 {
     [SerializeField] RectTransform libraryContent;
-    [SerializeField] SearchBook searchButton;
+    [SerializeField] SearchBook searchBook;
     [SerializeField] Transform bookTemplate;
 
 
@@ -16,13 +16,13 @@ public class SearchedBookListUI : MonoBehaviour
 
     private void OnEnable()
     {
-        searchButton.OnSearchButtonClicked += SearchButton_OnSearchButtonClicked;
+        searchBook.OnSearchButtonClicked += SearchBook_OnSearchButtonClicked;
     }
 
 
     private void OnDisable()
     {
-        searchButton.OnSearchButtonClicked -= SearchButton_OnSearchButtonClicked;
+        searchBook.OnSearchButtonClicked -= SearchBook_OnSearchButtonClicked;
     }
 
     private void Start()
@@ -31,7 +31,7 @@ public class SearchedBookListUI : MonoBehaviour
     }
 
 
-    private void SearchButton_OnSearchButtonClicked(List<BookSO> searchResults)
+    private void SearchBook_OnSearchButtonClicked(List<BookSO> searchResults)
     {
         UpdateVisual(searchResults);
     }
@@ -46,14 +46,7 @@ public class SearchedBookListUI : MonoBehaviour
             return;
         }
 
-        if (searchResults.Count <= 4)
-        {
-            libraryContent.sizeDelta = new Vector2(0, 400);
-        }
-        else if (searchResults.Count > 4)
-        {
-            libraryContent.sizeDelta = new Vector2(0, searchResults.Count * 100 + 100);
-        }
+        ScaleContentTransformSize(searchResults.Count);
 
         foreach (BookSO book in searchResults)
         {
@@ -79,6 +72,18 @@ public class SearchedBookListUI : MonoBehaviour
             if (child == bookTemplate) continue;
 
             Destroy(child.gameObject);
+        }
+    }
+
+    private void ScaleContentTransformSize(int resultCount)
+    {
+        if (resultCount <= 4)
+        {
+            libraryContent.sizeDelta = new Vector2(0, 0);
+        }
+        else if (resultCount > 4)
+        {
+            libraryContent.sizeDelta = new Vector2(0, resultCount * 50);
         }
     }
 }

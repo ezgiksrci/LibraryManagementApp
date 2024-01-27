@@ -5,9 +5,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EditBook : MonoBehaviour
+public class EditBook : BasePage
 {
-    [SerializeField] GameObject editPage;
     [SerializeField] TMP_InputField ISBNInput;
     [SerializeField] TMP_InputField titleInput;
     [SerializeField] TMP_InputField authorInput;
@@ -16,11 +15,12 @@ public class EditBook : MonoBehaviour
 
     [SerializeField] LibrarySO librarySO;
 
-    public void OnEditButtonClicked()
+    public void OnClickEditButton()
     {
         if (BookObject.GetSelectedBookSO() != null)
         {
-            ShowEditPage();
+            ShowPage();
+            FillSelectedBookInfo();
         }
         else
         {
@@ -28,20 +28,13 @@ public class EditBook : MonoBehaviour
         }
     }
 
-    private void ShowEditPage()
+    private void FillSelectedBookInfo()
     {
-        editPage.SetActive(true);
-
         ISBNInput.text = BookObject.GetSelectedBookSO().ISBN;
         titleInput.text = BookObject.GetSelectedBookSO().title;
         authorInput.text = BookObject.GetSelectedBookSO().author;
         pageCountInput.text = BookObject.GetSelectedBookSO().pageCount.ToString();
         publisherInput.text = BookObject.GetSelectedBookSO().publisher;
-    }
-
-    private void HideEditPage()
-    {
-        editPage.SetActive(false);
     }
 
     public void UpdateTheBook()
@@ -65,6 +58,6 @@ public class EditBook : MonoBehaviour
         pageCountInput.text = "";
         publisherInput.text = "";
 
-        HideEditPage();
+        HidePage();
     }
 }
