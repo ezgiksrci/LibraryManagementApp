@@ -1,8 +1,12 @@
+using System;
+using UnityEditor;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewBook", menuName = "Library/Book")]
 public class BookSO : ScriptableObject
 {
+    public LibrarySO librarySO;
+
     public string ISBN;
     public string title;
     public string author;
@@ -12,6 +16,9 @@ public class BookSO : ScriptableObject
     public string borrowerName;
     public System.DateTime dueDate;
     public bool isOverdued = false;
+
+    public static event Action OnBookDelete;
+
 
 
     // Method to set the book as borrowed
@@ -28,5 +35,22 @@ public class BookSO : ScriptableObject
         isAvailable = true;
         borrowerName = "";
         dueDate = System.DateTime.MinValue; // Reset due date
+    }
+
+    public void DeleteBook()
+    {
+        ScriptableObject scriptableObjectToDelete = this;
+        string assetPath = AssetDatabase.GetAssetPath(scriptableObjectToDelete);
+
+        librarySO.bookSOList.Remove(this);
+        
+        OnBookDelete?.Invoke();
+
+        // Delete the asset file
+        AssetDatabase.DeleteAsset(assetPath);
+
+        // Destroy the ScriptableObject instance
+        DestroyImmediate(scriptableObjectToDelete, true);
+
     }
 }

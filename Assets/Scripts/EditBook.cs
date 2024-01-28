@@ -14,14 +14,9 @@ public class EditBook : BasePage
     [SerializeField] TMP_InputField pageCountInput;
     [SerializeField] TMP_InputField publisherInput;
 
+    [SerializeField] string warningMessage;
+
     [SerializeField] LibrarySO librarySO;
-
-    //public static EditBook Instance { get; private set; }
-
-    //private void Awake()
-    //{
-    //    Instance = this;
-    //}
 
     private void OnEnable()
     {
@@ -32,21 +27,6 @@ public class EditBook : BasePage
     {
         ClearInputFields();
     }
-
-    //private void Start()
-    //{
-    //    BookObject.OnBookSelected += BookObject_OnBookSelected;
-    //}
-
-    //private void OnDestroy()
-    //{
-    //    BookObject.OnBookSelected -= BookObject_OnBookSelected;
-    //}
-
-    //private void BookObject_OnBookSelected()
-    //{
-    //    FillSelectedBookInfo();
-    //}
 
     private void FillSelectedBookInfo()
     {
@@ -62,17 +42,14 @@ public class EditBook : BasePage
 
     public void OnUpdateButtonClick()
     {
-        //
-        // Error handling controls...
-        //
-
-        if (true)
+        try
         {
             UpdateTheBook();
+
         }
-        else
+        catch (Exception)
         {
-            Debug.Log("Warning...");
+            MessageBox.Instance.ShowWarningPanel(warningMessage);
         }
     }
 

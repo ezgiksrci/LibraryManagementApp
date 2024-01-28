@@ -5,13 +5,14 @@ using TMPro;
 
 public class AddBook : MonoBehaviour
 {
+    [SerializeField] LibrarySO librarySO;
+
     [SerializeField] TMP_InputField ISBNInput;
     [SerializeField] TMP_InputField titleInput;
     [SerializeField] TMP_InputField authorInput;
     [SerializeField] TMP_InputField pageCountInput;
     [SerializeField] TMP_InputField publisherInput;
 
-    [SerializeField] LibrarySO librarySO;
 
     public void OnAddBookButtonClicked()
     {
@@ -22,6 +23,7 @@ public class AddBook : MonoBehaviour
         newBook.author = authorInput.text;
         newBook.pageCount = int.Parse(pageCountInput.text);
         newBook.publisher = publisherInput.text;
+        newBook.librarySO = librarySO;
 
         // Add the new book to the list
         librarySO.bookSOList.Add(newBook);

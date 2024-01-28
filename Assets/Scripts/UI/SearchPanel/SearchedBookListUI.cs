@@ -7,9 +7,13 @@ using UnityEngine.UI;
 
 public class SearchedBookListUI : MonoBehaviour
 {
+    [SerializeField] LibrarySO librarySO;
+
     [SerializeField] RectTransform libraryContent;
     [SerializeField] SearchBook searchBook;
     [SerializeField] Transform bookTemplate;
+
+    private List<BookSO> searchResultList;
 
 
     public event Action<BookSO> OnBookFind;
@@ -17,13 +21,19 @@ public class SearchedBookListUI : MonoBehaviour
     private void OnEnable()
     {
         searchBook.OnSearchButtonClicked += SearchBook_OnSearchButtonClicked;
+        BookSO.OnBookDelete += SearchBook_OnBookDelete;
         ClearTheList();
     }
-
 
     private void OnDisable()
     {
         searchBook.OnSearchButtonClicked -= SearchBook_OnSearchButtonClicked;
+        BookSO.OnBookDelete -= SearchBook_OnBookDelete;
+
+    }
+    private void SearchBook_OnBookDelete()
+    {
+        UpdateVisual(librarySO.bookSOList);
     }
 
     private void Start()
@@ -34,6 +44,7 @@ public class SearchedBookListUI : MonoBehaviour
 
     private void SearchBook_OnSearchButtonClicked(List<BookSO> searchResults)
     {
+        searchResultList = searchResults;
         UpdateVisual(searchResults);
     }
 

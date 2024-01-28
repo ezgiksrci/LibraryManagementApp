@@ -3,7 +3,13 @@ guid: 0846be024a2c5724e85e14fd1cf69f21
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - librarySO: {fileID: 11400000, guid: e4ec9298ec97de944b6d3a76a8b41564, type: 2}
+  - ISBNInput: {instanceID: 0}
+  - titleInput: {instanceID: 0}
+  - authorInput: {instanceID: 0}
+  - pageCountInput: {instanceID: 0}
+  - publisherInput: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -7,20 +7,17 @@ using UnityEngine.UI;
 
 public class SearchBook : BasePage
 {
+    [SerializeField] LibrarySO librarySO;
 
     public event Action<List<BookSO>> OnSearchButtonClicked;
 
     [SerializeField] TMP_InputField searchInput;
-    [SerializeField] LibrarySO librarySO;
+    [SerializeField] string notSelectedWarningMessage;
+    [SerializeField] string noRecordWarningMessage;
+    [SerializeField] string notAvailabeWarningMessage;
+    [SerializeField] string deleteConfirmationMessage;
 
     public static List<BookSO> searchResults;
-
-    //public static SearchBook Instance { get; private set; }
-
-    //private void Awake()
-    //{
-    //    Instance = this;
-    //}
 
     private void Start()
     {
@@ -36,7 +33,36 @@ public class SearchBook : BasePage
         }
         else
         {
-            Debug.Log("There is not a selected book.");
+            MessageBox.Instance.ShowWarningPanel(notSelectedWarningMessage);
+        }
+    }
+
+    public void OnClickLendButton()
+    {
+        if (BookObject.GetSelectedBookSO() == null)
+        {
+            MessageBox.Instance.ShowWarningPanel(notSelectedWarningMessage);
+        }
+        else if (!BookObject.GetSelectedBookSO().isAvailable)
+        {
+            MessageBox.Instance.ShowWarningPanel(notAvailabeWarningMessage);
+        }
+        else
+        {
+            PageManager.Instance.lendBookPage.SetActive(true);
+            gameObject.SetActive(false);
+        }
+    }
+
+    public void OnClickDeleteButton()
+    {
+        if (BookObject.GetSelectedBookSO() == null)
+        {
+            MessageBox.Instance.ShowWarningPanel(notSelectedWarningMessage);
+        }
+        else
+        {
+            MessageBox.Instance.ShowConfirmationPanel(deleteConfirmationMessage, BookObject.GetSelectedBookSO().DeleteBook);
         }
     }
 
@@ -60,14 +86,13 @@ public class SearchBook : BasePage
         // Display search results
         if (searchResults.Count > 0)
         {
-            // Debug.Log("Search Results:");
 
             OnSearchButtonClicked?.Invoke(searchResults);
 
         }
         else
         {
-            // Debug.LogWarning("No matching books found.");
+            MessageBox.Instance.ShowWarningPanel(noRecordWarningMessage);
 
             OnSearchButtonClicked?.Invoke(null);
         }
