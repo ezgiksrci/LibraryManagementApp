@@ -4,8 +4,5 @@ using UnityEngine;
 
 public class LendBook : BasePage
 {
-    public void OnClickLendButton()
-    {
-        ShowPanel();
-    }
+
 }

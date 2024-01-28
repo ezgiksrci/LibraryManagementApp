@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class SearchBook : BasePage
 {
+
     public event Action<List<BookSO>> OnSearchButtonClicked;
 
     [SerializeField] TMP_InputField searchInput;
@@ -14,28 +15,29 @@ public class SearchBook : BasePage
 
     public static List<BookSO> searchResults;
 
+    //public static SearchBook Instance { get; private set; }
+
+    //private void Awake()
+    //{
+    //    Instance = this;
+    //}
+
     private void Start()
     {
-        EditBook.OnPanelOpen += EditBook_OnPanelOpen;
-        EditBook.OnPanelClose += EditBook_OnPanelClose;
-
         searchResults = new List<BookSO>();
     }
 
-    private void OnDestroy()
+    public void OnClickEditButton()
     {
-        EditBook.OnPanelOpen -= EditBook_OnPanelOpen;
-        EditBook.OnPanelClose -= EditBook_OnPanelClose;
-    }
-
-    private void EditBook_OnPanelClose(object sender, EventArgs e)
-    {
-        ShowPanel();
-    }
-
-    private void EditBook_OnPanelOpen(object sender, EventArgs e)
-    {
-        HidePanel();
+        if (BookObject.GetSelectedBookSO() != null)
+        {
+            PageManager.Instance.editBookPage.SetActive(true);
+            gameObject.SetActive(false);
+        }
+        else
+        {
+            Debug.Log("There is not a selected book.");
+        }
     }
 
     public void SearchinLibrary()

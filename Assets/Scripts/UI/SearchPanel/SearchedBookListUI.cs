@@ -17,6 +17,7 @@ public class SearchedBookListUI : MonoBehaviour
     private void OnEnable()
     {
         searchBook.OnSearchButtonClicked += SearchBook_OnSearchButtonClicked;
+        ClearTheList();
     }
 
 
