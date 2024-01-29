@@ -58,7 +58,7 @@ public class SearchedBookListUI : MonoBehaviour
             return;
         }
 
-        ScaleContentTransformSize(searchResults.Count);
+        //ScaleContentTransformSize(searchResults.Count);
 
         foreach (BookSO book in searchResults)
         {
