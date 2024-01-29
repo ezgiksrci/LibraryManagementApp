@@ -10,4 +10,5 @@ public class SearchedBookFieldsUI : MonoBehaviour
     public TMP_Text author_LabelText;
     public TMP_Text overdueDate_LabelText;
     public TMP_Text isOverdue_LabelText;
+    public TMP_Text borrowerName_LabelText;
 }

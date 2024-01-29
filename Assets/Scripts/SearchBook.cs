@@ -100,4 +100,38 @@ public class SearchBook : BasePage
         // Clear input field
         searchInput.text = "";
     }
+
+    public void SearchbyBorrowerName()
+    {
+        string searchQuery = searchInput.text.ToLower();
+
+        // Search for borrower
+        searchResults.Clear();
+
+        foreach (var book in librarySO.bookSOList)
+        {
+            if (book.borrowerName.ToLower().Contains(searchQuery))
+            {
+                searchResults.Add(book);
+            }
+        }
+
+        // Display search results
+        if (searchResults.Count > 0)
+        {
+
+            OnSearchButtonClicked?.Invoke(searchResults);
+
+        }
+        else
+        {
+            MessageBox.Instance.ShowWarningPanel(noRecordWarningMessage);
+
+            OnSearchButtonClicked?.Invoke(null);
+        }
+
+        // Clear input field
+        searchInput.text = "";
+    }
+
 }

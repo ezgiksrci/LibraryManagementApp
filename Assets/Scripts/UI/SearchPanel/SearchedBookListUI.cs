@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,8 +13,6 @@ public class SearchedBookListUI : MonoBehaviour
     [SerializeField] RectTransform libraryContent;
     [SerializeField] SearchBook searchBook;
     [SerializeField] Transform bookTemplate;
-
-    private List<BookSO> searchResultList;
 
 
     public event Action<BookSO> OnBookFind;
@@ -44,7 +43,6 @@ public class SearchedBookListUI : MonoBehaviour
 
     private void SearchBook_OnSearchButtonClicked(List<BookSO> searchResults)
     {
-        searchResultList = searchResults;
         UpdateVisual(searchResults);
     }
 
@@ -58,7 +56,7 @@ public class SearchedBookListUI : MonoBehaviour
             return;
         }
 
-        //ScaleContentTransformSize(searchResults.Count);
+        ScaleContentTransformSize(searchResults.Count);
 
         foreach (BookSO book in searchResults)
         {
@@ -68,8 +66,13 @@ public class SearchedBookListUI : MonoBehaviour
             searchedBookFieldsUI.ISBN_LabelText.text = book.ISBN;
             searchedBookFieldsUI.title_LabelText.text = book.title;
             searchedBookFieldsUI.author_LabelText.text = book.author;
-            searchedBookFieldsUI.overdueDate_LabelText.text = book.isAvailable ? "Not borrowed" : book.dueDate.ToShortDateString();
+            searchedBookFieldsUI.overdueDate_LabelText.text = book.isAvailable ? "Not borrowed" : book.dueDate.ToShortString();
             searchedBookFieldsUI.isOverdue_LabelText.text = book.isOverdued ? "Yes" : "No";
+
+            if (searchedBookFieldsUI.borrowerName_LabelText != null)
+            {
+                searchedBookFieldsUI.borrowerName_LabelText.text = book.borrowerName;
+            }
 
             newBook.SetActive(true);
 
