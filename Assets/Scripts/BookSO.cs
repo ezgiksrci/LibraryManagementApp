@@ -35,5 +35,10 @@ public class BookSO : ScriptableObject
         // destroy the SO instance
         DestroyImmediate(scriptableObjectToDelete, true);
 
+        UnityEditor.EditorUtility.SetDirty(librarySO);
+        UnityEditor.AssetDatabase.SaveAssets();
+        UnityEditor.AssetDatabase.Refresh();
+
+
     }
 }
