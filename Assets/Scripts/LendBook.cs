@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
@@ -16,22 +17,26 @@ public class LendBook : BasePage
     [SerializeField] TMP_InputField borrowerNameInput;
     [SerializeField] TMP_InputField borrowingPeriodInput;
 
+    // book lending process with borrower name and borrowing period
     public void LendTheBook()
     {
-        BookSO bookSO = BookObject.GetSelectedBookSO();
-        string assetPath = AssetDatabase.GetAssetPath(bookSO);
+        BookSO selectedBookSO = BookObject.GetSelectedBookSO();
 
-        bookSO.isOverdued = false;
-        bookSO.isAvailable = false;
-        bookSO.borrowerName = borrowerNameInput.text;
+        selectedBookSO.isOverdued = false;
+        selectedBookSO.isAvailable = false;
+        selectedBookSO.borrowerName = borrowerNameInput.text;
 
         int borrowingPeriod = int.Parse(borrowingPeriodInput.text);
-        bookSO.dueDate = DateTime.Now.AddDays(borrowingPeriod);
+        selectedBookSO.dueDate = DateTime.Now.AddDays(borrowingPeriod);
+        selectedBookSO.dueDateString = selectedBookSO.dueDate.ToString();
 
+        UnityEditor.EditorUtility.SetDirty(selectedBookSO);
         UnityEditor.AssetDatabase.SaveAssets();
         UnityEditor.AssetDatabase.Refresh();
 
-        // Set selectedBookSO = null
+        //Debug.Log(selectedBookSO.dueDate);
+
+        // set selectedBookSO = null
         BookObject.ClearSelectedBookSO();
     }
 }

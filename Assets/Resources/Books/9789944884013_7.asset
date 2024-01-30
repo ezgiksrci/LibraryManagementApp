@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fee02bb45a8601c4dbe627ec4e4f336e, type: 3}
-  m_Name: 4565465465465_6
+  m_Name: 9789944884013_7
   m_EditorClassIdentifier: 
   librarySO: {fileID: 11400000, guid: e4ec9298ec97de944b6d3a76a8b41564, type: 2}
-  ISBN: 4565465465465
-  title: sdgdsffgsdfgsdfg
-  author: sdfgsdfg
-  publisher: sdfgsdfg
-  pageCount: 45545
+  ISBN: 9789944884013
+  title: "Yeralt\u0131ndan Notlar: Hasan Ali Y\xFCcel Klasikleri"
+  author: "Fyodor Mihaylovi\xE7 Dostoyevski"
+  publisher: "T\xFCrkiye \u0130\u015F Bankas\u0131 K\xFClt\xFCr Yay\u0131nlar\u0131"
+  pageCount: 144
   isAvailable: 1
   borrowerName: 
+  dueDateString: 
   isOverdued: 0

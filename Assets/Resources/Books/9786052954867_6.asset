@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fee02bb45a8601c4dbe627ec4e4f336e, type: 3}
-  m_Name: 5555555555555_1
+  m_Name: 9786052954867_6
   m_EditorClassIdentifier: 
   librarySO: {fileID: 11400000, guid: e4ec9298ec97de944b6d3a76a8b41564, type: 2}
-  ISBN: 5555555555555
-  title: dsdfa
-  author: dasfasdf
-  publisher: dsad
-  pageCount: 333
+  ISBN: 9786052954867
+  title: "Babalar ve O\u011Fullar \u2013 K\u0131salt\u0131lm\u0131\u015F Metin"
+  author: "Ivan Sergeyevi\xE7 Turgenyev"
+  publisher: "T\xFCrkiye \u0130\u015F Bankas\u0131 K\xFClt\xFCr Yay\u0131nlar\u0131"
+  pageCount: 96
   isAvailable: 1
   borrowerName: 
+  dueDateString: 
   isOverdued: 0

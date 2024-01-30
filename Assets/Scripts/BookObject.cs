@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// bookObject - bookSO pair for search list items...
 public class BookObject : MonoBehaviour
 {
     [SerializeField] SearchedBookListUI searchedBooklistUI;

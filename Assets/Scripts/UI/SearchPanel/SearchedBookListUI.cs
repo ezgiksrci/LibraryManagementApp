@@ -12,7 +12,7 @@ public class SearchedBookListUI : MonoBehaviour
 
     [SerializeField] RectTransform libraryContent;
     [SerializeField] SearchBook searchBook;
-    [SerializeField] Transform bookTemplate;
+    [SerializeField] Transform bookTemplate; //template for search result item
 
 
     public event Action<BookSO> OnBookFind;
@@ -66,8 +66,21 @@ public class SearchedBookListUI : MonoBehaviour
             searchedBookFieldsUI.ISBN_LabelText.text = book.ISBN;
             searchedBookFieldsUI.title_LabelText.text = book.title;
             searchedBookFieldsUI.author_LabelText.text = book.author;
-            searchedBookFieldsUI.overdueDate_LabelText.text = book.isAvailable ? "Not borrowed" : book.dueDate.ToShortString();
-            searchedBookFieldsUI.isOverdue_LabelText.text = book.isOverdued ? "Yes" : "No";
+            searchedBookFieldsUI.publisher_LabelText.text = book.publisher;
+            searchedBookFieldsUI.overdueDate_LabelText.text = book.isAvailable ? "Not borrowed" : book.dueDateString.Split()[0];
+
+
+            if (!book.isAvailable && book.dueDate.Date < DateTime.Today.Date)
+            {
+                book.isOverdued = true;
+                searchedBookFieldsUI.isOverdue_LabelText.text = "Yes";
+
+            }
+            else
+            {
+                book.isOverdued = false;
+                searchedBookFieldsUI.isOverdue_LabelText.text = "No";
+            }
 
             if (searchedBookFieldsUI.borrowerName_LabelText != null)
             {
@@ -90,6 +103,7 @@ public class SearchedBookListUI : MonoBehaviour
         }
     }
 
+    // to adjust the size of the content field based on the number of search results
     private void ScaleContentTransformSize(int resultCount)
     {
         if (resultCount <= 4)

@@ -1,13 +1,9 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class EditBook : BasePage
 {
-
     [SerializeField] TMP_InputField ISBNInput;
     [SerializeField] TMP_InputField titleInput;
     [SerializeField] TMP_InputField authorInput;
@@ -55,16 +51,19 @@ public class EditBook : BasePage
 
     private void UpdateTheBook()
     {
-        // Update BookSO datas
-        BookObject.GetSelectedBookSO().title = titleInput.text;
-        BookObject.GetSelectedBookSO().author = authorInput.text;
-        BookObject.GetSelectedBookSO().pageCount = int.Parse(pageCountInput.text);
-        BookObject.GetSelectedBookSO().publisher = publisherInput.text;
+        // update BookSO datas
+        BookSO selectedBookSO = BookObject.GetSelectedBookSO();
+        
+        selectedBookSO.title = titleInput.text;
+        selectedBookSO.author = authorInput.text;
+        selectedBookSO.pageCount = int.Parse(pageCountInput.text);
+        selectedBookSO.publisher = publisherInput.text;
 
+        UnityEditor.EditorUtility.SetDirty(selectedBookSO);
         UnityEditor.AssetDatabase.SaveAssets();
         UnityEditor.AssetDatabase.Refresh();
 
-        // Set selectedBookSO = null
+        // set selectedBookSO = null
         BookObject.ClearSelectedBookSO();
 
         ClearInputFields();
@@ -75,7 +74,7 @@ public class EditBook : BasePage
 
     private void ClearInputFields()
     {
-        // Clear input fields
+        // clear input fields
         ISBNInput.text = "";
         titleInput.text = "";
         authorInput.text = "";

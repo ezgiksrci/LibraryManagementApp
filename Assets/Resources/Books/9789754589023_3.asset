@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fee02bb45a8601c4dbe627ec4e4f336e, type: 3}
-  m_Name: 4532523523453_4
+  m_Name: 9789754589023_3
   m_EditorClassIdentifier: 
   librarySO: {fileID: 11400000, guid: e4ec9298ec97de944b6d3a76a8b41564, type: 2}
-  ISBN: 4532523523453
-  title: dgdfsfgdfsg
-  author: dfgsdfgsdg
-  publisher: fdgsdfgsdfg
-  pageCount: 5654645
-  isAvailable: 0
-  borrowerName: ezgi
+  ISBN: 9789754589023
+  title: "Su\xE7 ve Ceza"
+  author: "Fyodor Mihaylovi\xE7 Dostoyevski"
+  publisher: "\u0130\u015F Bankas\u0131 K\xFClt\xFCr Yay\u0131nlar\u0131"
+  pageCount: 704
+  isAvailable: 1
+  borrowerName: 
+  dueDateString: 
   isOverdued: 0

@@ -15,6 +15,7 @@ public class BookSO : ScriptableObject
     public bool isAvailable = true;
     public string borrowerName;
     public DateTime dueDate;
+    public string dueDateString;
     public bool isOverdued = false;
 
     public static event Action OnBookDelete;
@@ -28,10 +29,10 @@ public class BookSO : ScriptableObject
 
         OnBookDelete?.Invoke();
 
-        // Delete the asset file
+        // delete the asset file
         AssetDatabase.DeleteAsset(assetPath);
 
-        // Destroy the SO instance
+        // destroy the SO instance
         DestroyImmediate(scriptableObjectToDelete, true);
 
     }

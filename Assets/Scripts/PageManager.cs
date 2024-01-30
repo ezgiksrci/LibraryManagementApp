@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// this class controls the right panel's pages of SetActive()'s...
+
 public class PageManager : MonoBehaviour
 {
     public static PageManager Instance { get; private set; }
@@ -12,7 +14,6 @@ public class PageManager : MonoBehaviour
     public GameObject editBookPage;
     public GameObject lendBookPage;
     public GameObject returnBookPage;
-    public GameObject viewOverdueBooksPage;
 
     private List<GameObject> pageList;
 
@@ -25,12 +26,11 @@ public class PageManager : MonoBehaviour
         editBookPage.SetActive(false);
         lendBookPage.SetActive(false);
         returnBookPage.SetActive(false);
-        viewOverdueBooksPage.SetActive(false);
     }
 
     private void Start()
     {
-        pageList = new List<GameObject> { homePage, addBookPage, searchBookPage, editBookPage, lendBookPage, returnBookPage, viewOverdueBooksPage };
+        pageList = new List<GameObject> { homePage, addBookPage, searchBookPage, editBookPage, lendBookPage, returnBookPage };
     }
 
     public void CloseAllPagesExceptMe(GameObject senderPage)

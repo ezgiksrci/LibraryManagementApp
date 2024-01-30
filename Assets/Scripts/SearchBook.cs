@@ -79,6 +79,11 @@ public class SearchBook : BasePage
                 book.author.ToLower().Contains(searchQuery) ||
                 book.ISBN.ToLower().Contains(searchQuery))
             {
+                if (!book.isAvailable)
+                {
+                    book.dueDate = DateTime.Parse(book.dueDateString);
+                }
+
                 searchResults.Add(book);
             }
         }
@@ -103,6 +108,12 @@ public class SearchBook : BasePage
 
     public void SearchbyBorrowerName()
     {
+        if (searchInput.text == null || searchInput.text == "")
+        {
+            MessageBox.Instance.ShowWarningPanel("Please enter a search query...");
+            return;
+        }
+
         string searchQuery = searchInput.text.ToLower();
 
         // Search for borrower
@@ -110,9 +121,14 @@ public class SearchBook : BasePage
 
         foreach (var book in librarySO.bookSOList)
         {
-            if (book.borrowerName.ToLower().Contains(searchQuery))
+            if ((book.borrowerName.ToLower().Contains(searchQuery)))
             {
                 searchResults.Add(book);
+
+                if (!book.isAvailable)
+                {
+                    book.dueDate = DateTime.Parse(book.dueDateString);
+                }
             }
         }
 
