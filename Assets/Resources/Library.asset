@@ -13,9 +13,6 @@ MonoBehaviour:
   m_Name: Library
   m_EditorClassIdentifier: 
   bookSOList:
-  - {fileID: 11400000, guid: 8d13d0aee9353374285d714894c1ea4d, type: 2}
-  - {fileID: 11400000, guid: fb973f2f64aa4ae478e2318e82f04de6, type: 2}
   - {fileID: 11400000, guid: 314a466cb7690b34a96acc8764a10d16, type: 2}
   - {fileID: 11400000, guid: 1659ccc6799886d4a97196077880f4f0, type: 2}
   - {fileID: 11400000, guid: aa228a6d20e7c8e40a64490e0cd88a97, type: 2}
-  - {fileID: 11400000, guid: 2e4d43e45495e464baa8b20c70e81ef8, type: 2}
