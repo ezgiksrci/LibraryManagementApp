@@ -8,31 +8,30 @@ using UnityEngine.UI;
 
 public class SearchedBookListUI : MonoBehaviour
 {
-    [SerializeField] LibrarySO librarySO;
+    private CloudSave cloudSave;
 
     [SerializeField] RectTransform libraryContent;
     [SerializeField] SearchBook searchBook;
     [SerializeField] Transform bookTemplate; //template for search result item
 
-
-    public event Action<BookSO> OnBookFind;
+    public event Action<KeyValuePair<string, Book>> OnBookFind;
 
     private void OnEnable()
     {
         searchBook.OnSearchButtonClicked += SearchBook_OnSearchButtonClicked;
-        BookSO.OnBookDelete += SearchBook_OnBookDelete;
+        //Book.OnBookDelete += SearchBook_OnBookDelete;
         ClearTheList();
     }
 
     private void OnDisable()
     {
         searchBook.OnSearchButtonClicked -= SearchBook_OnSearchButtonClicked;
-        BookSO.OnBookDelete -= SearchBook_OnBookDelete;
+        //Book.OnBookDelete -= SearchBook_OnBookDelete;
 
     }
     private void SearchBook_OnBookDelete()
     {
-        UpdateVisual(librarySO.bookSOList);
+        UpdateVisual(cloudSave.Books);
     }
 
     private void Start()
@@ -41,12 +40,12 @@ public class SearchedBookListUI : MonoBehaviour
     }
 
 
-    private void SearchBook_OnSearchButtonClicked(List<BookSO> searchResults)
+    private void SearchBook_OnSearchButtonClicked(Dictionary<string, Book> searchResults)
     {
         UpdateVisual(searchResults);
     }
 
-    private void UpdateVisual(List<BookSO> searchResults)
+    private void UpdateVisual(Dictionary<string, Book> searchResults)
     {
         ClearTheList();
 
@@ -58,33 +57,33 @@ public class SearchedBookListUI : MonoBehaviour
 
         ScaleContentTransformSize(searchResults.Count);
 
-        foreach (BookSO book in searchResults)
+        foreach (var book in searchResults)
         {
             GameObject newBook = Instantiate(bookTemplate.gameObject, libraryContent);
 
             SearchedBookFieldsUI searchedBookFieldsUI = newBook.transform.GetComponent<SearchedBookFieldsUI>();
-            searchedBookFieldsUI.ISBN_LabelText.text = book.ISBN;
-            searchedBookFieldsUI.title_LabelText.text = book.title;
-            searchedBookFieldsUI.author_LabelText.text = book.author;
-            searchedBookFieldsUI.publisher_LabelText.text = book.publisher;
-            searchedBookFieldsUI.overdueDate_LabelText.text = book.isAvailable ? "Not borrowed" : book.dueDateString.Split()[0];
+            searchedBookFieldsUI.ISBN_LabelText.text = book.Value.ISBN;
+            searchedBookFieldsUI.title_LabelText.text = book.Value.title;
+            searchedBookFieldsUI.author_LabelText.text = book.Value.author;
+            searchedBookFieldsUI.publisher_LabelText.text = book.Value.publisher;
+            searchedBookFieldsUI.overdueDate_LabelText.text = book.Value.isAvailable ? "Not borrowed" : book.Value.dueDateString.Split()[0];
 
 
-            if (!book.isAvailable && book.dueDate.Date < DateTime.Today.Date)
+            if (!book.Value.isAvailable && book.Value.dueDate.Date < DateTime.Today.Date)
             {
-                book.isOverdued = true;
+                book.Value.isOverdued = true;
                 searchedBookFieldsUI.isOverdue_LabelText.text = "Yes";
 
             }
             else
             {
-                book.isOverdued = false;
+                book.Value.isOverdued = false;
                 searchedBookFieldsUI.isOverdue_LabelText.text = "No";
             }
 
             if (searchedBookFieldsUI.borrowerName_LabelText != null)
             {
-                searchedBookFieldsUI.borrowerName_LabelText.text = book.borrowerName;
+                searchedBookFieldsUI.borrowerName_LabelText.text = book.Value.borrowerName;
             }
 
             newBook.SetActive(true);

@@ -12,7 +12,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f14b50a622c83a64392eb5b1a46dd5aa, type: 3}
   m_Name: Library
   m_EditorClassIdentifier: 
-  bookSOList:
-  - {fileID: 11400000, guid: 314a466cb7690b34a96acc8764a10d16, type: 2}
-  - {fileID: 11400000, guid: 1659ccc6799886d4a97196077880f4f0, type: 2}
-  - {fileID: 11400000, guid: aa228a6d20e7c8e40a64490e0cd88a97, type: 2}

@@ -13,40 +13,43 @@ public class AddBook : MonoBehaviour
     [SerializeField] TMP_InputField pageCountInput;
     [SerializeField] TMP_InputField publisherInput;
 
+    [SerializeField] CloudSave cloudSave;
+
 
     public void OnAddBookButtonClicked()
     {
-        try
-        {
-            // create a new instance of the Book ScriptableObject
-            BookSO newBook = ScriptableObject.CreateInstance<BookSO>();
-            newBook.ISBN = ISBNInput.text;
-            newBook.title = titleInput.text;
-            newBook.author = authorInput.text;
-            newBook.pageCount = int.Parse(pageCountInput.text);
-            newBook.publisher = publisherInput.text;
-            newBook.librarySO = librarySO;
+        //    try
+        //    {
 
-            // add the new book to the list
-            librarySO.bookSOList.Add(newBook);
+        Book newBook = new Book();
+        newBook.ISBN = ISBNInput.text;
+        newBook.title = titleInput.text;
+        newBook.author = authorInput.text;
+        newBook.pageCount = int.Parse(pageCountInput.text);
+        newBook.publisher = publisherInput.text;
 
-            // save the new bookSO asset
-            string path = "Assets/Resources/Books/" + ISBNInput.text + "_" + librarySO.bookSOList.Count + ".asset";
-            UnityEditor.AssetDatabase.CreateAsset(newBook, path);
-            UnityEditor.AssetDatabase.SaveAssets();
-            UnityEditor.AssetDatabase.Refresh();
+        // add the new book to the list
+        //librarySO.bookSOList.Add(newBook);
 
-            // clear input fields
-            ISBNInput.text = "";
-            titleInput.text = "";
-            authorInput.text = "";
-            pageCountInput.text = "";
-            publisherInput.text = "";
-        }
+        cloudSave.AddBook(newBook);
 
-        catch (System.Exception)
-        {
-            MessageBox.Instance.ShowWarningPanel("Please make sure you enter the information correctly.");
-        }
+        //// save the new bookSO asset
+        //string path = "Assets/Resources/Books/" + ISBNInput.text + "_" + librarySO.bookSOList.Count + ".asset";
+        //UnityEditor.AssetDatabase.CreateAsset(newBook, path);
+        //UnityEditor.AssetDatabase.SaveAssets();
+        //UnityEditor.AssetDatabase.Refresh();
+
+        // clear input fields
+        ISBNInput.text = "";
+        titleInput.text = "";
+        authorInput.text = "";
+        pageCountInput.text = "";
+        publisherInput.text = "";
+        //}
+
+        //catch (System.Exception)
+        //{
+        //    MessageBox.Instance.ShowWarningPanel("Please make sure you enter the information correctly.");
+        //}
     }
 }

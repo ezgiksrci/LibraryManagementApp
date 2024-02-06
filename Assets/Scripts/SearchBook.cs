@@ -7,9 +7,8 @@ using UnityEngine.UI;
 
 public class SearchBook : BasePage
 {
-    [SerializeField] LibrarySO librarySO;
-
-    public event Action<List<BookSO>> OnSearchButtonClicked;
+    private CloudSave cloudSave;
+    public event Action<Dictionary<string, Book>> OnSearchButtonClicked;
 
     [SerializeField] TMP_InputField searchInput;
     [SerializeField] string notSelectedWarningMessage;
@@ -17,16 +16,16 @@ public class SearchBook : BasePage
     [SerializeField] string notAvailabeWarningMessage;
     [SerializeField] string deleteConfirmationMessage;
 
-    public static List<BookSO> searchResults;
+    public static Dictionary<string, Book> searchResults;
 
     private void Start()
     {
-        searchResults = new List<BookSO>();
+        searchResults = new Dictionary<string, Book>();
     }
 
     public void OnClickEditButton()
     {
-        if (BookObject.GetSelectedBookSO() != null)
+        if (!BookObject.GetSelectedBookObject().Equals(default))
         {
             PageManager.Instance.editBookPage.SetActive(true);
             gameObject.SetActive(false);
@@ -39,11 +38,11 @@ public class SearchBook : BasePage
 
     public void OnClickLendButton()
     {
-        if (BookObject.GetSelectedBookSO() == null)
+        if (!BookObject.GetSelectedBookObject().Equals(default))
         {
             MessageBox.Instance.ShowWarningPanel(notSelectedWarningMessage);
         }
-        else if (!BookObject.GetSelectedBookSO().isAvailable)
+        else if (!BookObject.GetSelectedBookObject().Value.isAvailable)
         {
             MessageBox.Instance.ShowWarningPanel(notAvailabeWarningMessage);
         }
@@ -56,13 +55,13 @@ public class SearchBook : BasePage
 
     public void OnClickDeleteButton()
     {
-        if (BookObject.GetSelectedBookSO() == null)
+        if (!BookObject.GetSelectedBookObject().Equals(default))
         {
             MessageBox.Instance.ShowWarningPanel(notSelectedWarningMessage);
         }
         else
         {
-            MessageBox.Instance.ShowConfirmationPanel(deleteConfirmationMessage, BookObject.GetSelectedBookSO().DeleteBook);
+            //MessageBox.Instance.ShowConfirmationPanel(deleteConfirmationMessage, BookObject.GetSelectedBookSO().DeleteBook);
         }
     }
 
@@ -73,18 +72,18 @@ public class SearchBook : BasePage
         // Search for books by title, author, or ISBN
         searchResults.Clear();
 
-        foreach (var book in librarySO.bookSOList)
+        foreach (var book in cloudSave.Books)
         {
-            if (book.title.ToLower().Contains(searchQuery) ||
-                book.author.ToLower().Contains(searchQuery) ||
-                book.ISBN.ToLower().Contains(searchQuery))
+            if (book.Value.title.ToLower().Contains(searchQuery) ||
+                book.Value.author.ToLower().Contains(searchQuery) ||
+                book.Value.ISBN.ToLower().Contains(searchQuery))
             {
-                if (!book.isAvailable)
+                if (!book.Value.isAvailable)
                 {
-                    book.dueDate = DateTime.Parse(book.dueDateString);
+                    book.Value.dueDate = DateTime.Parse(book.Value.dueDateString);
                 }
 
-                searchResults.Add(book);
+                searchResults.Add(book.Key, book.Value);
             }
         }
 
@@ -119,15 +118,15 @@ public class SearchBook : BasePage
         // Search for borrower
         searchResults.Clear();
 
-        foreach (var book in librarySO.bookSOList)
+        foreach (var book in cloudSave.Books)
         {
-            if ((book.borrowerName.ToLower().Contains(searchQuery)))
+            if ((book.Value.borrowerName.ToLower().Contains(searchQuery)))
             {
-                searchResults.Add(book);
+                searchResults.Add(book.Key, book.Value);
 
-                if (!book.isAvailable)
+                if (!book.Value.isAvailable)
                 {
-                    book.dueDate = DateTime.Parse(book.dueDateString);
+                    book.Value.dueDate = DateTime.Parse(book.Value.dueDateString);
                 }
             }
         }

@@ -7,8 +7,8 @@ using UnityEngine;
 public class BookObject : MonoBehaviour
 {
     [SerializeField] SearchedBookListUI searchedBooklistUI;
-    [SerializeField] BookSO bookSO;
-    public static BookSO selectedBookSO;
+    [SerializeField] KeyValuePair<string, Book> book;
+    public static KeyValuePair<string, Book> selectedBook;
 
     public static event Action OnBookSelected;
 
@@ -22,30 +22,30 @@ public class BookObject : MonoBehaviour
         searchedBooklistUI.OnBookFind -= SearchedBooklistUI_OnBookFind;
     }
 
-    private void SearchedBooklistUI_OnBookFind(BookSO bookSO)
+    private void SearchedBooklistUI_OnBookFind(KeyValuePair<string, Book> book)
     {
-        if (this.bookSO == null)
+        if (book.Equals(default))
         {
-            this.bookSO = bookSO;
+            this.book = book;
         }
     }
 
     public void SetAsSelectedBook()
     {
-        if (selectedBookSO == null || selectedBookSO != bookSO)
+        if (!selectedBook.Equals(default) || !selectedBook.Equals(book))
         {
-            selectedBookSO = bookSO;
+            selectedBook = book;
             OnBookSelected?.Invoke();
         }
     }
 
-    public static BookSO GetSelectedBookSO()
+    public static KeyValuePair<string, Book> GetSelectedBookObject()
     {
-        return selectedBookSO;
+        return selectedBook;
     }
 
-    public static void ClearSelectedBookSO()
+    public static void ClearSelectedBookObject()
     {
-        selectedBookSO = null;
+        selectedBook = default;
     }
 }

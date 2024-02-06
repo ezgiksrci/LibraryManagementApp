@@ -8,6 +8,8 @@ using UnityEngine;
 
 public class LendBook : BasePage
 {
+    private CloudSave cloudSave;
+
     [Header("Selected Book Infos")]
     [SerializeField] TextMeshProUGUI ISBNText;
     [SerializeField] TextMeshProUGUI bookTitleText;
@@ -20,23 +22,21 @@ public class LendBook : BasePage
     // book lending process with borrower name and borrowing period
     public void LendTheBook()
     {
-        BookSO selectedBookSO = BookObject.GetSelectedBookSO();
+        var selectedBook = BookObject.GetSelectedBookObject();
 
-        selectedBookSO.isOverdued = false;
-        selectedBookSO.isAvailable = false;
-        selectedBookSO.borrowerName = borrowerNameInput.text;
+        selectedBook.Value.isOverdued = false;
+        selectedBook.Value.isAvailable = false;
+        selectedBook.Value.borrowerName = borrowerNameInput.text;
 
         int borrowingPeriod = int.Parse(borrowingPeriodInput.text);
-        selectedBookSO.dueDate = DateTime.Now.AddDays(borrowingPeriod);
-        selectedBookSO.dueDateString = selectedBookSO.dueDate.ToString();
+        selectedBook.Value.dueDate = DateTime.Now.AddDays(borrowingPeriod);
+        selectedBook.Value.dueDateString = selectedBook.Value.dueDate.ToString();
 
-        UnityEditor.EditorUtility.SetDirty(selectedBookSO);
-        UnityEditor.AssetDatabase.SaveAssets();
-        UnityEditor.AssetDatabase.Refresh();
+        cloudSave.UpdateBook(selectedBook);
 
-        //Debug.Log(selectedBookSO.dueDate);
+        //Debug.Log(selectedBook.dueDate);
 
-        // set selectedBookSO = null
-        BookObject.ClearSelectedBookSO();
+        // set selectedBook = null
+        BookObject.ClearSelectedBookObject();
     }
 }

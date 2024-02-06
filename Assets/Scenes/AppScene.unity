@@ -2513,7 +2513,6 @@ MonoBehaviour:
   pageCountInput: {fileID: 815432126}
   publisherInput: {fileID: 165856833}
   warningMessage: Please make sure the input is the correct format.
-  librarySO: {fileID: 11400000, guid: e4ec9298ec97de944b6d3a76a8b41564, type: 2}
 --- !u!1 &218836957
 GameObject:
   m_ObjectHideFlags: 0
@@ -3897,7 +3896,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   page: {fileID: 336304574}
-  librarySO: {fileID: 11400000, guid: e4ec9298ec97de944b6d3a76a8b41564, type: 2}
   searchInput: {fileID: 2068450318}
   notSelectedWarningMessage: You have to choose a book.
   noRecordWarningMessage: No record found. Please check the search input.
@@ -7132,7 +7130,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fa959dcb8d24484dada5769073e867d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  librarySO: {fileID: 11400000, guid: e4ec9298ec97de944b6d3a76a8b41564, type: 2}
   libraryContent: {fileID: 503872282}
   searchBook: {fileID: 1071871802}
   bookTemplate: {fileID: 1297180342}
@@ -9566,7 +9563,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   page: {fileID: 0}
-  librarySO: {fileID: 11400000, guid: e4ec9298ec97de944b6d3a76a8b41564, type: 2}
   searchInput: {fileID: 996157785}
   notSelectedWarningMessage: You have to choose a book.
   noRecordWarningMessage: No record found. Please check the search input.
@@ -11854,7 +11850,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   searchedBooklistUI: {fileID: 845505954}
-  bookSO: {fileID: 0}
 --- !u!114 &1297180344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12392,7 +12387,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   searchedBooklistUI: {fileID: 2011887593}
-  bookSO: {fileID: 0}
 --- !u!114 &1375912279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15813,6 +15807,50 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Padding: {x: -8, y: -5, z: -8, w: -5}
   m_Softness: {x: 0, y: 0}
+--- !u!1 &1717109104
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1717109106}
+  - component: {fileID: 1717109105}
+  m_Layer: 0
+  m_Name: AppManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1717109105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1717109104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88acb53cb15513c4eb4bf574ccfc3cb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1717109106
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1717109104}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1717981212
 GameObject:
   m_ObjectHideFlags: 0
@@ -18451,6 +18489,7 @@ MonoBehaviour:
   authorInput: {fileID: 108651961}
   pageCountInput: {fileID: 489790928}
   publisherInput: {fileID: 131337429}
+  cloudSave: {fileID: 1717109105}
 --- !u!1 &1959252291
 GameObject:
   m_ObjectHideFlags: 0
@@ -18837,7 +18876,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fa959dcb8d24484dada5769073e867d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  librarySO: {fileID: 11400000, guid: e4ec9298ec97de944b6d3a76a8b41564, type: 2}
   libraryContent: {fileID: 1528189558}
   searchBook: {fileID: 336304576}
   bookTemplate: {fileID: 1375912275}

@@ -12,7 +12,7 @@ public class EditBook : BasePage
 
     [SerializeField] string warningMessage;
 
-    [SerializeField] LibrarySO librarySO;
+    //[SerializeField] LibrarySO librarySO;
 
     private void OnEnable()
     {
@@ -26,13 +26,13 @@ public class EditBook : BasePage
 
     private void FillSelectedBookInfo()
     {
-        if (BookObject.GetSelectedBookSO() != null)
+        if (!BookObject.GetSelectedBookObject().Equals(default))
         {
-            ISBNInput.text = BookObject.GetSelectedBookSO().ISBN;
-            titleInput.text = BookObject.GetSelectedBookSO().title;
-            authorInput.text = BookObject.GetSelectedBookSO().author;
-            pageCountInput.text = BookObject.GetSelectedBookSO().pageCount.ToString();
-            publisherInput.text = BookObject.GetSelectedBookSO().publisher;
+            ISBNInput.text = BookObject.GetSelectedBookObject().Value.ISBN;
+            titleInput.text = BookObject.GetSelectedBookObject().Value.title;
+            authorInput.text = BookObject.GetSelectedBookObject().Value.author;
+            pageCountInput.text = BookObject.GetSelectedBookObject().Value.pageCount.ToString();
+            publisherInput.text = BookObject.GetSelectedBookObject().Value.publisher;
         }
     }
 
@@ -40,7 +40,7 @@ public class EditBook : BasePage
     {
         try
         {
-            UpdateTheBook();
+            //UpdateTheBook();
 
         }
         catch (Exception)
@@ -49,28 +49,28 @@ public class EditBook : BasePage
         }
     }
 
-    private void UpdateTheBook()
-    {
-        // update BookSO datas
-        BookSO selectedBookSO = BookObject.GetSelectedBookSO();
+    //private void UpdateTheBook()
+    //{
+    //    // update BookSO datas
+    //    Book selectedBookSO = BookObject.GetSelectedBookObject();
         
-        selectedBookSO.title = titleInput.text;
-        selectedBookSO.author = authorInput.text;
-        selectedBookSO.pageCount = int.Parse(pageCountInput.text);
-        selectedBookSO.publisher = publisherInput.text;
+    //    selectedBookSO.title = titleInput.text;
+    //    selectedBookSO.author = authorInput.text;
+    //    selectedBookSO.pageCount = int.Parse(pageCountInput.text);
+    //    selectedBookSO.publisher = publisherInput.text;
 
-        UnityEditor.EditorUtility.SetDirty(selectedBookSO);
-        UnityEditor.AssetDatabase.SaveAssets();
-        UnityEditor.AssetDatabase.Refresh();
+    //    UnityEditor.EditorUtility.SetDirty(selectedBookSO);
+    //    UnityEditor.AssetDatabase.SaveAssets();
+    //    UnityEditor.AssetDatabase.Refresh();
 
-        // set selectedBookSO = null
-        BookObject.ClearSelectedBookSO();
+    //    // set selectedBookSO = null
+    //    BookObject.ClearSelectedBookObject();
 
-        ClearInputFields();
+    //    ClearInputFields();
 
-        PageManager.Instance.searchBookPage.SetActive(true);
-        gameObject.SetActive(false);
-    }
+    //    PageManager.Instance.searchBookPage.SetActive(true);
+    //    gameObject.SetActive(false);
+    //}
 
     private void ClearInputFields()
     {
@@ -80,5 +80,10 @@ public class EditBook : BasePage
         authorInput.text = "";
         pageCountInput.text = "";
         publisherInput.text = "";
+    }
+
+    private void UpdateBook()
+    {
+
     }
 }

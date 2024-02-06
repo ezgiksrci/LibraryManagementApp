@@ -5,5 +5,5 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "newLibrary", menuName = "Library/Library")]
 public class LibrarySO : ScriptableObject
 {
-    public List<BookSO> bookSOList;
+    public List<Book> bookSOList;
 }

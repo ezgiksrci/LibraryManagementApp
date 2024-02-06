@@ -15,27 +15,27 @@ public class ReturnBook : MonoBehaviour
     // selected book returning
     public void OnClickReturnButton()
     {
-        BookSO selectedBookSO = BookObject.GetSelectedBookSO();
+        var selectedBook = BookObject.GetSelectedBookObject();
 
-        if (selectedBookSO != null && !selectedBookSO.isAvailable)
+        if (!BookObject.GetSelectedBookObject().Equals(default) && !selectedBook.Value.isAvailable)
         {
-            selectedBookSO.borrowerName = "";
-            selectedBookSO.isOverdued = false;
-            selectedBookSO.isAvailable = true;
-            selectedBookSO.dueDate = DateTime.MinValue;
-            selectedBookSO.dueDateString = null;
+            selectedBook.Value.borrowerName = "";
+            selectedBook.Value.isOverdued = false;
+            selectedBook.Value.isAvailable = true;
+            selectedBook.Value.dueDate = DateTime.MinValue;
+            selectedBook.Value.dueDateString = null;
 
-            UnityEditor.EditorUtility.SetDirty(selectedBookSO);
-            UnityEditor.AssetDatabase.SaveAssets();
-            UnityEditor.AssetDatabase.Refresh();
+            //UnityEditor.EditorUtility.SetDirty(selectedBook);
+            //UnityEditor.AssetDatabase.SaveAssets();
+            //UnityEditor.AssetDatabase.Refresh();
 
             // set selectedBookSO = null
-            BookObject.ClearSelectedBookSO();
+            BookObject.ClearSelectedBookObject();
 
             MessageBox.Instance.ShowWarningPanel(successMessage);
         }
         // book is not borrowed
-        else if (selectedBookSO.isAvailable)
+        else if (selectedBook.Value.isAvailable)
         {
             MessageBox.Instance.ShowWarningPanel(bookNotBorrowedMessage);
         }
@@ -49,13 +49,13 @@ public class ReturnBook : MonoBehaviour
     // lended book's period extend button method
     public void OnClickExtendPeriodButton()
     {
-        BookSO selectedBookSO = BookObject.GetSelectedBookSO();
+        var selectedBook = BookObject.GetSelectedBookObject();
 
-        if (selectedBookSO != null && !selectedBookSO.isAvailable)
+        if (!BookObject.GetSelectedBookObject().Equals(default) && !selectedBook.Value.isAvailable)
         {
             MessageBox.Instance.ShowConfirmationPanel(periodExtentionConfirmationMessage, ExtendBookPeriod);
         }
-        else if (selectedBookSO.isAvailable)
+        else if (selectedBook.Value.isAvailable)
         {
             MessageBox.Instance.ShowWarningPanel(bookNotBorrowedMessage);
         }
@@ -68,17 +68,17 @@ public class ReturnBook : MonoBehaviour
     // extend the selected and lended book's due date for 10 days...
     private void ExtendBookPeriod()
     {
-        BookSO selectedBookSO = BookObject.GetSelectedBookSO();
+        var selectedBook = BookObject.GetSelectedBookObject();
 
-        selectedBookSO.dueDate = selectedBookSO.dueDate.AddDays(10f);
-        selectedBookSO.dueDateString = selectedBookSO.dueDate.ToString();
+        selectedBook.Value.dueDate = selectedBook.Value.dueDate.AddDays(10f);
+        selectedBook.Value.dueDateString = selectedBook.Value.dueDate.ToString();
 
-        UnityEditor.EditorUtility.SetDirty(selectedBookSO);
-        UnityEditor.AssetDatabase.SaveAssets();
-        UnityEditor.AssetDatabase.Refresh();
+        //UnityEditor.EditorUtility.SetDirty(selectedBook);
+        //UnityEditor.AssetDatabase.SaveAssets();
+        //UnityEditor.AssetDatabase.Refresh();
 
         // set selectedBookSO = null
-        BookObject.ClearSelectedBookSO();
+        BookObject.ClearSelectedBookObject();
 
         MessageBox.Instance.ShowWarningPanel(successMessage);
     }
